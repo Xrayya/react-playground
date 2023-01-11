@@ -43,3 +43,23 @@ code {
     transform: rotate(360deg);
   }
 }
+
+h1 {
+  font-size: 56px;
+}
+
+.description {
+  font-size: 24px;
+}
+
+.react-link {
+  padding: 0px 4px;
+  display: inline-block;
+  background-color: hsla(0, 0%, 0%, 0.1);
+  border-radius: 4px;
+}
+
+.react-link > a {
+  color: #61dafb;
+  font-size: 48px;
+}

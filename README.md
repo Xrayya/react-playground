@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## List of Mini Projects
+
+1. Simple tic-tac-toe
+2. CSS flexbox playground (react version)
+3. Calculator (TODO)
+
 ## Available Scripts
 
 In the project directory, you can run:

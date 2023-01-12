@@ -4,15 +4,19 @@
   margin: 0px;
 }
 
+body {
+  background-color: #171717;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .home {
+  color: #fafafa;
   text-align: center;
-
-  padding: 0px 32px;
+  padding: 0px 128px;
 }
 
 .home-logo {
@@ -22,7 +26,7 @@ code {
 
 @media (prefers-reduced-motion: no-preference) {
   .home-logo {
-    animation: home-logo-spin infinite 20s linear;
+    animation: home-logo-spin infinite 16s linear;
   }
 }
 
@@ -65,9 +69,23 @@ code {
 
 .project-list-container {
   padding-top: 96px;
-  width: 100%;
 }
 
-.project-container > h2 {
+.project-list-container > h2 {
   font-size: calc(12px + 2vmin);
+  margin-bottom: 8px;
+}
+
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.project {
+  flex-basis: 30%;
+
+  border: 4px solid grey;
+  border-radius: 8px;
 }

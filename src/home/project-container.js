@@ -2,14 +2,14 @@ import React from 'react';
 
 const ProjectContainer = (props) => {
   return (
-    <div className='Project'>
+    <div className='project'>
       <img
-        className='Project-Image'
+        className='project-image'
         src={props.imageSource}
         alt={props.imageAlt}
       />
-      <h3 className='Project-Title'>{props.title}</h3>
-      <p className='Project-Description'>{props.description}</p>
+      <h3 className='project-title'>{props.title}</h3>
+      <p className='project-description'>{props.description}</p>
     </div>
   );
 };

@@ -5,12 +5,12 @@ import ProjectListContainer from './project-list-container';
 
 const HomePage = () => {
   return (
-    <div className='Home'>
-      <header className='Home-header'>
+    <div className='home'>
+      <header className='home-header'>
         <h1>Welcome to React Playground</h1>
-        <img src={logo} className='Home-logo' alt='react-logo' />
+        <img src={logo} className='home-logo' alt='react-logo' />
       </header>
-      <div className='description'>
+      <div className='home-description'>
         <p>
           this project created as repository to store all my mini project while
           I learn

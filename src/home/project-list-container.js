@@ -4,7 +4,7 @@ const ProjectListContainer = (props) => {
   return (
     <div className='project-list-container'>
       <h2>Here are my react projects</h2>
-      <div class='project-list'>{props.children}</div>
+      <div className='project-list'>{props.children}</div>
     </div>
   );
 };

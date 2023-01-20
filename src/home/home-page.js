@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import logo from './logo.svg';
 import './home.css';
 import ProjectListContainer from './project-list-container';
+import ProjectContainer from './project-container';
 
 const HomePage = () => {
+  const targetRef = useRef();
+
   return (
     <div className='home'>
       <header className='home-header'>
@@ -21,7 +24,13 @@ const HomePage = () => {
           </a>
         </span>
       </div>
-      <ProjectListContainer></ProjectListContainer>
+      <ProjectListContainer ref={targetRef}>
+        <ProjectContainer title='testing' />
+        <ProjectContainer title='testing2' />
+        <ProjectContainer title='testing3' />
+        <ProjectContainer title='testing4' />
+        <ProjectContainer title='testing5' />
+      </ProjectListContainer>
     </div>
   );
 };

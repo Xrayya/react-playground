@@ -14,12 +14,12 @@ const Playground = () => {
         style={{
           width: '100%',
           display: 'flex',
-          justifyContent: 'center'
+          justifyContent: 'center',
         }}
       >
         Flexbox Playground
       </h3>
-      <Display />
+      <Display boxCount={10} rules={{justifyContent: 'space-between'}} />
     </div>
   );
 };

@@ -1,17 +1,29 @@
 import React from 'react';
 
-const StyleBox = ({ ruleName, options }) => {
+const StyleBox = ({ ruleName, options, preset }) => {
   const listOfOptions = options.map((opt, index) => (
-    <li key={index} style={{ listStyle: 'none' }}>
-      <input type='radio' name='options' id={opt} />
-      <label htmlFor={opt}>{opt}</label>
+    <li
+      key={index}
+      style={{
+        listStyle: 'none',
+        display: 'flex',
+        textAlign: 'center',
+        gap: '4px',
+      }}
+    >
+      <input
+        type='radio'
+        name={ruleName}
+        id={ruleName + opt}
+        defaultChecked={opt === preset}
+      />
+      <label htmlFor={ruleName + opt}>{opt}</label>
     </li>
   ));
 
   return (
     <div
       style={{
-        width: '300px',
         height: 'fit-content',
         border: '4px solid grey',
         borderRadius: '8px',
@@ -19,7 +31,7 @@ const StyleBox = ({ ruleName, options }) => {
 
         display: 'flex',
         flexDirection: 'column',
-        gap: '4px'
+        gap: '4px',
       }}
     >
       <h4 style={{ textAlign: 'center' }}>{ruleName}</h4>

@@ -27,6 +27,7 @@ const Display = ({ boxCount, rules }) => {
           border: '4px solid grey',
           borderRadius: '8px',
           padding: '8px',
+          boxSizing: 'border-box'
         }}
       >
         <div style={rules}>{boxes}</div>

@@ -1,10 +1,14 @@
 import React from 'react';
 import Display from './display';
+import StyleBox from './styleBox';
 
 const Playground = () => {
   const playgroundStyle = (isDesktop) => ({
     color: '#fafafa',
     padding: isDesktop ? '64px' : '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px'
   });
   const isDesktop = true;
 
@@ -12,14 +16,13 @@ const Playground = () => {
     <div style={playgroundStyle(isDesktop)}>
       <h3
         style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
+          textAlign: 'center'
         }}
       >
         Flexbox Playground
       </h3>
-      <Display boxCount={10} rules={{justifyContent: 'space-between'}} />
+      <Display boxCount={10} rules={{ justifyContent: 'space-between' }} />
+      <StyleBox ruleName={'justify-content'} options={['flex-start(default)', 'center', 'flex-end']} />
     </div>
   );
 };

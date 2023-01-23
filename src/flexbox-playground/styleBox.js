@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StyleBox = ({ ruleName, options, preset }) => {
+const StyleBox = ({ ruleName, options, preset, onClick }) => {
   const listOfOptions = options.map((opt, index) => (
     <li
       key={index}
@@ -16,6 +16,7 @@ const StyleBox = ({ ruleName, options, preset }) => {
         name={ruleName}
         id={ruleName + opt}
         defaultChecked={opt === preset}
+        onClick={() => onClick(ruleName, opt)}
       />
       <label htmlFor={ruleName + opt}>{opt}</label>
     </li>

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Display from './display';
 import StyleBox from './styleBox';
 
 const Playground = () => {
+  const [isDesktop, setIsDesktop] = useState(true);
+  const [displayRules, setDisplayRules] = useState({});
+
   const playgroundStyle = (isDesktop) => ({
     color: '#fafafa',
     padding: isDesktop ? '64px' : '16px',
@@ -10,7 +13,10 @@ const Playground = () => {
     flexDirection: 'column',
     gap: '8px',
   });
-  const isDesktop = true;
+
+  const handleOnClick = (ruleName, selectedOption) => {
+    setDisplayRules((rules) => (rules.ruleName = selectedOption));
+  };
 
   return (
     <div style={playgroundStyle(isDesktop)}>
@@ -40,6 +46,7 @@ const Playground = () => {
             'space-evenly',
           ]}
           preset='flex-start (default)'
+          onClick={handleOnClick}
         />
         <StyleBox
           ruleName={'align-items'}
@@ -51,16 +58,19 @@ const Playground = () => {
             'stretch',
           ]}
           preset='flex-start (default)'
+          onClick={handleOnClick}
         />
         <StyleBox
           ruleName={'flex-direction'}
           options={['row (default)', 'row-reverse', 'column', 'column-reverse']}
           preset='row (default)'
+          onClick={handleOnClick}
         />
         <StyleBox
           ruleName={'flex-wrap'}
           options={['nowrap (default)', 'wrap', 'wrap-reverse']}
           preset='wrap'
+          onClick={handleOnClick}
         />
       </div>
     </div>

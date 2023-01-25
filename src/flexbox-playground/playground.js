@@ -15,7 +15,11 @@ const Playground = () => {
   });
 
   const handleOnClick = (ruleName, selectedOption) => {
-    setDisplayRules((rules) => (rules.ruleName = selectedOption));
+    setDisplayRules((rules) => {
+      rules[kebabToCamel(ruleName)] = selectedOption;
+      return rules;
+    });
+    console.log(displayRules);
   };
 
   return (
@@ -38,43 +42,53 @@ const Playground = () => {
         <StyleBox
           ruleName={'justify-content'}
           options={[
-            'flex-start (default)',
+            'flex-start',
             'flex-end',
             'center',
             'space-between',
             'space-around',
             'space-evenly',
           ]}
-          preset='flex-start (default)'
+          defaultOpt='flex-start'
+          preChecked='flex-start'
           onClick={handleOnClick}
         />
         <StyleBox
           ruleName={'align-items'}
-          options={[
-            'flex-start (default)',
-            'flex-end',
-            'center',
-            'baseline',
-            'stretch',
-          ]}
-          preset='flex-start (default)'
+          options={['flex-start', 'flex-end', 'center', 'baseline', 'stretch']}
+          defaultOpt='flex-start'
+          preChecked='flex-start'
           onClick={handleOnClick}
         />
         <StyleBox
           ruleName={'flex-direction'}
-          options={['row (default)', 'row-reverse', 'column', 'column-reverse']}
-          preset='row (default)'
+          options={['row', 'row-reverse', 'column', 'column-reverse']}
+          defaultOpt='row'
+          preChecked='row'
           onClick={handleOnClick}
         />
         <StyleBox
           ruleName={'flex-wrap'}
-          options={['nowrap (default)', 'wrap', 'wrap-reverse']}
-          preset='wrap'
+          options={['nowrap', 'wrap', 'wrap-reverse']}
+          defaultOpt='nowrap'
+          preChecked='wrap'
           onClick={handleOnClick}
         />
       </div>
     </div>
   );
 };
+
+function kebabToCamel(str) {
+  let arr = str.split('-');
+  let camel = arr.map(
+    (item, index) =>
+      (index ? item.charAt(0).toUpperCase() : item.charAt(0)) +
+      item.slice(1).toLowerCase()
+  );
+  let camelStr = camel.join('');
+
+  return camelStr;
+}
 
 export default Playground;

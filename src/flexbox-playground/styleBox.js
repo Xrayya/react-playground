@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StyleBox = ({ ruleName, options, preset, onClick }) => {
+const StyleBox = ({ ruleName, options, defaultOpt, preChecked, onClick }) => {
   const listOfOptions = options.map((opt, index) => (
     <li
       key={index}
@@ -15,10 +15,12 @@ const StyleBox = ({ ruleName, options, preset, onClick }) => {
         type='radio'
         name={ruleName}
         id={ruleName + opt}
-        defaultChecked={opt === preset}
+        defaultChecked={opt === preChecked}
         onClick={() => onClick(ruleName, opt)}
       />
-      <label htmlFor={ruleName + opt}>{opt}</label>
+      <label htmlFor={ruleName + opt}>
+        {opt + (opt === defaultOpt ? ' (default)' : '')}
+      </label>
     </li>
   ));
 

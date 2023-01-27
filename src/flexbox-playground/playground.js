@@ -4,7 +4,12 @@ import StyleBox from './styleBox';
 
 const Playground = () => {
   const [isDesktop, setIsDesktop] = useState(true);
-  const [displayRules, setDisplayRules] = useState({});
+  const [displayRules, setDisplayRules] = useState({
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  });
 
   const playgroundStyle = (isDesktop) => ({
     color: '#fafafa',
@@ -14,10 +19,11 @@ const Playground = () => {
     gap: '8px',
   });
 
-  const handleOnClick = (ruleName, selectedOption) => {
+  const handleOnChange = (ruleName, selectedOption) => {
     setDisplayRules((rules) => {
-      rules[kebabToCamel(ruleName)] = selectedOption;
-      return rules;
+      let newRules = { ...rules}
+      newRules[kebabToCamel(ruleName)] = selectedOption;
+      return newRules;
     });
     console.log(displayRules);
   };
@@ -31,7 +37,7 @@ const Playground = () => {
       >
         Flexbox Playground
       </h3>
-      <Display boxCount={10} rules={{ justifyContent: 'space-between' }} />
+      <Display boxCount={10} rules={displayRules} />
       <div
         style={{
           width: '100%',
@@ -51,32 +57,39 @@ const Playground = () => {
           ]}
           defaultOpt='flex-start'
           preChecked='flex-start'
-          onClick={handleOnClick}
+          onChange={handleOnChange}
         />
         <StyleBox
           ruleName={'align-items'}
           options={['flex-start', 'flex-end', 'center', 'baseline', 'stretch']}
           defaultOpt='flex-start'
           preChecked='flex-start'
-          onClick={handleOnClick}
+          onChange={handleOnChange}
         />
         <StyleBox
           ruleName={'flex-direction'}
           options={['row', 'row-reverse', 'column', 'column-reverse']}
           defaultOpt='row'
           preChecked='row'
-          onClick={handleOnClick}
+          onChange={handleOnChange}
         />
         <StyleBox
           ruleName={'flex-wrap'}
           options={['nowrap', 'wrap', 'wrap-reverse']}
           defaultOpt='nowrap'
           preChecked='wrap'
-          onClick={handleOnClick}
+          onChange={handleOnChange}
         />
       </div>
     </div>
   );
+};
+
+let setupRules = {
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
 };
 
 function kebabToCamel(str) {

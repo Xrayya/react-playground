@@ -5,8 +5,6 @@ const Display = ({ boxCount, rules }) => {
   const boxWidth = '36px';
   const boxHeight = '36px';
   const boxColor = 'aquamarine';
-  
-  rules.display = 'flex'
 
   let boxes = [];
   for (let i = 0; i < boxCount; i++) {
@@ -27,10 +25,20 @@ const Display = ({ boxCount, rules }) => {
           border: '4px solid grey',
           borderRadius: '8px',
           padding: '8px',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         }}
       >
-        <div style={rules}>{boxes}</div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: rules.justifyContent,
+            alignItems: rules.alignItems,
+            flexDirection: rules.flexDirection,
+            flexWrap: rules.flexWrap,
+          }}
+        >
+          {boxes}
+        </div>
       </div>
     );
 };

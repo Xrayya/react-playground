@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from './box';
 
-const Display = ({ boxCount, rules }) => {
+const Display = ({ boxCount, boxGap, rules }) => {
   const boxWidth = '36px';
   const boxHeight = '36px';
   const boxColor = 'aquamarine';
@@ -11,10 +11,6 @@ const Display = ({ boxCount, rules }) => {
     boxes.push(
       <Box key={i} width={boxWidth} height={boxHeight} color={boxColor} />
     );
-  }
-
-  for (let i = 0; i < boxCount; i++) {
-    boxes.push();
   }
 
   for (let i = 0; i < boxCount; i++)
@@ -35,6 +31,7 @@ const Display = ({ boxCount, rules }) => {
             alignItems: rules.alignItems,
             flexDirection: rules.flexDirection,
             flexWrap: rules.flexWrap,
+            gap: `${boxGap}px`,
           }}
         >
           {boxes}

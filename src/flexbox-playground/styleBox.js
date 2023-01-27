@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const StyleBox = ({ ruleName, options, defaultOpt, preChecked, onChange }) => {
   const listOfOptions = options.map((opt, index) => (
@@ -23,6 +23,10 @@ const StyleBox = ({ ruleName, options, defaultOpt, preChecked, onChange }) => {
       </label>
     </li>
   ));
+
+  // useEffect(() => {
+  //   onChange(ruleName, defaultOpt);
+  // }, []);
 
   return (
     <div

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Controller from './controller';
 import Display from './display';
 import StyleBox from './styleBox';
 
@@ -10,6 +11,8 @@ const Playground = () => {
     flexDirection: 'row',
     flexWrap: 'wrap',
   });
+  const [boxCount, setBoxCount] = useState(10);
+  const [boxGap, setBoxGap] = useState(0);
 
   const playgroundStyle = (isDesktop) => ({
     color: '#fafafa',
@@ -19,13 +22,20 @@ const Playground = () => {
     gap: '8px',
   });
 
-  const handleOnChange = (ruleName, selectedOption) => {
+  const handleStyleBoxOnChange = (ruleName, selectedOption) => {
     setDisplayRules((rules) => {
       let newRules = { ...rules };
       newRules[kebabToCamel(ruleName)] = selectedOption;
       return newRules;
     });
-    console.log(displayRules);
+  };
+
+  const handleBoxCountOnChange = (event) => {
+    setBoxCount(event.target.value);
+  };
+
+  const handleBoxGapOnChange = (event) => {
+    setBoxGap(event.target.value);
   };
 
   return (
@@ -37,7 +47,36 @@ const Playground = () => {
       >
         Flexbox Playground
       </h3>
-      <Display boxCount={10} rules={displayRules} />
+      <Display boxCount={boxCount} boxGap={boxGap} rules={displayRules} />
+      <div>
+        <div
+          style={{
+            border: '4px solid grey',
+            borderRadius: '8px',
+            padding: '4px',
+
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '4px',
+          }}
+        >
+          <h3>Box Control</h3>
+          <hr />
+          <Controller
+            title='Box Count'
+            type='number'
+            defaultValue={boxCount}
+            onChange={handleBoxCountOnChange}
+          />
+          <Controller
+            title='Gap'
+            type='number'
+            suffix='px'
+            defaultValue={boxGap}
+            onChange={handleBoxGapOnChange}
+          />
+        </div>
+      </div>
       <div
         style={{
           width: '100%',
@@ -57,28 +96,28 @@ const Playground = () => {
           ]}
           defaultOpt='flex-start'
           preChecked='flex-start'
-          onChange={handleOnChange}
+          onChange={handleStyleBoxOnChange}
         />
         <StyleBox
           ruleName={'align-items'}
           options={['flex-start', 'flex-end', 'center', 'baseline', 'stretch']}
           defaultOpt='flex-start'
           preChecked='flex-start'
-          onChange={handleOnChange}
+          onChange={handleStyleBoxOnChange}
         />
         <StyleBox
           ruleName={'flex-direction'}
           options={['row', 'row-reverse', 'column', 'column-reverse']}
           defaultOpt='row'
           preChecked='row'
-          onChange={handleOnChange}
+          onChange={handleStyleBoxOnChange}
         />
         <StyleBox
           ruleName={'flex-wrap'}
           options={['nowrap', 'wrap', 'wrap-reverse']}
           defaultOpt='nowrap'
           preChecked='wrap'
-          onChange={handleOnChange}
+          onChange={handleStyleBoxOnChange}
         />
       </div>
     </div>

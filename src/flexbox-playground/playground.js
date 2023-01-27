@@ -21,7 +21,7 @@ const Playground = () => {
 
   const handleOnChange = (ruleName, selectedOption) => {
     setDisplayRules((rules) => {
-      let newRules = { ...rules}
+      let newRules = { ...rules };
       newRules[kebabToCamel(ruleName)] = selectedOption;
       return newRules;
     });

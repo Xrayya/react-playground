@@ -13,6 +13,10 @@ const Playground = () => {
   });
   const [boxCount, setBoxCount] = useState(10);
   const [boxGap, setBoxGap] = useState(0);
+  const [boxWidth, setBoxWidth] = useState(36);
+  const [boxHeight, setBoxHeight] = useState(36);
+  const [displayHeight, setDisplayHeight] = useState(60);
+  const [displayWidth, setDisplayWidth] = useState(100);
 
   const playgroundStyle = (isDesktop) => ({
     color: '#fafafa',
@@ -30,12 +34,8 @@ const Playground = () => {
     });
   };
 
-  const handleBoxCountOnChange = (event) => {
-    setBoxCount(event.target.value);
-  };
-
-  const handleBoxGapOnChange = (event) => {
-    setBoxGap(event.target.value);
+  const handleControllerOnChange = (event, setter) => {
+    setter(event.target.value);
   };
 
   return (
@@ -47,8 +47,16 @@ const Playground = () => {
       >
         Flexbox Playground
       </h3>
-      <Display boxCount={boxCount} boxGap={boxGap} rules={displayRules} />
-      <div>
+      <Display
+        containerWidth={displayWidth}
+        containerHeight={displayHeight}
+        boxCount={boxCount}
+        boxGap={boxGap}
+        boxWidth={boxWidth}
+        boxHeight={boxHeight}
+        rules={displayRules}
+      />
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div
           style={{
             border: '4px solid grey',
@@ -66,14 +74,68 @@ const Playground = () => {
             title='Box Count'
             type='number'
             defaultValue={boxCount}
-            onChange={handleBoxCountOnChange}
+            onChange={(event) => {
+              setBoxCount(event.target.value);
+            }}
           />
           <Controller
             title='Gap'
             type='number'
             suffix='px'
             defaultValue={boxGap}
-            onChange={handleBoxGapOnChange}
+            onChange={(event) => {
+              setBoxGap(event.target.value);
+            }}
+          />
+          <Controller
+            title='Box Width'
+            type='number'
+            suffix='px'
+            defaultValue={boxWidth}
+            onChange={(event) => {
+              setBoxWidth(event.target.value);
+            }}
+          />
+          <Controller
+            title='Box Height'
+            type='number'
+            suffix='px'
+            defaultValue={boxHeight}
+            onChange={(event) => {
+              setBoxHeight(event.target.value);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            border: '4px solid grey',
+            borderRadius: '8px',
+            padding: '4px',
+
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '4px',
+          }}
+        >
+          <h3>Display Control</h3>
+          <hr />
+          <Controller
+            title='Display Width'
+            type='number'
+            suffix='%'
+            defaultValue={displayWidth}
+            onChange={(event) => {
+              setDisplayWidth(event.target.value);
+            }}
+          />
+          <Controller
+            title='Display Height'
+            type='number'
+            suffix='px'
+            defaultValue={displayHeight}
+            onChange={(event) => {
+              setDisplayHeight(event.target.value);
+            }}
           />
         </div>
       </div>

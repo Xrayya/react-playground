@@ -7,7 +7,8 @@ const Playground = () => {
   const [isDesktop, setIsDesktop] = useState(true);
   const [displayRules, setDisplayRules] = useState({
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    alignContent: 'flex-start',
     flexDirection: 'row',
     flexWrap: 'wrap',
   });
@@ -34,10 +35,6 @@ const Playground = () => {
     });
   };
 
-  const handleControllerOnChange = (event, setter) => {
-    setter(event.target.value);
-  };
-
   return (
     <div style={playgroundStyle(isDesktop)}>
       <h3
@@ -56,9 +53,17 @@ const Playground = () => {
         boxHeight={boxHeight}
         rules={displayRules}
       />
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'stretch',
+          gap: '8px'
+        }}
+      >
         <div
           style={{
+            flexGrow: 1,
             border: '4px solid grey',
             borderRadius: '8px',
             padding: '4px',
@@ -108,6 +113,7 @@ const Playground = () => {
         </div>
         <div
           style={{
+            flexGrow: 1,
             border: '4px solid grey',
             borderRadius: '8px',
             padding: '4px',
@@ -168,6 +174,21 @@ const Playground = () => {
           onChange={handleStyleBoxOnChange}
         />
         <StyleBox
+          ruleName={'align-content'}
+          options={[
+            'stretch',
+            'center',
+            'flex-start',
+            'flex-end',
+            'space-between',
+            'space-around',
+            'space-evenly',
+          ]}
+          defaultOpt='stretch'
+          preChecked='flex-start'
+          onChange={handleStyleBoxOnChange}
+        />
+        <StyleBox
           ruleName={'flex-direction'}
           options={['row', 'row-reverse', 'column', 'column-reverse']}
           defaultOpt='row'
@@ -184,13 +205,6 @@ const Playground = () => {
       </div>
     </div>
   );
-};
-
-let setupRules = {
-  justifyContent: 'flex-start',
-  alignItems: 'flex-start',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
 };
 
 function kebabToCamel(str) {

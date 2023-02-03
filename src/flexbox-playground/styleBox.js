@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect }  from 'react';
 
 const StyleBox = ({ ruleName, options, defaultOpt, preChecked, onChange }) => {
   const listOfOptions = options.map((opt, index) => (
@@ -13,7 +13,7 @@ const StyleBox = ({ ruleName, options, defaultOpt, preChecked, onChange }) => {
     >
       <input
         type='radio'
-        name={ruleName}
+        name={ruleName || 'unknown rule'}
         id={ruleName + opt}
         defaultChecked={opt === preChecked}
         onChange={() => onChange(ruleName, opt)}
@@ -24,14 +24,11 @@ const StyleBox = ({ ruleName, options, defaultOpt, preChecked, onChange }) => {
     </li>
   ));
 
-  // useEffect(() => {
-  //   onChange(ruleName, defaultOpt);
-  // }, []);
-
   return (
     <div
       style={{
-        height: 'fit-content',
+        height: '100%',
+        flexGrow: 1,
         border: '4px solid grey',
         borderRadius: '8px',
         padding: '8px',

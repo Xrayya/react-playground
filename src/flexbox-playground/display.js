@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Box from './box';
 
 const Display = ({
@@ -24,30 +24,29 @@ const Display = ({
     );
   }
 
-  for (let i = 0; i < boxCount; i++)
+  for (let i = 0; i < boxCount || 0; i++)
     return (
       <div
         style={{
-          width: `${containerWidth}%`,
-          height: `${containerHeight}px`,
+          width: `${containerWidth || 100}%`,
+          height: `${containerHeight || 60}px`,
           border: '4px solid grey',
           borderRadius: '8px',
           padding: '8px',
           boxSizing: 'border-box',
+
+          overflow: 'hidden',
+
+          display: 'flex',
+          justifyContent: rules.justifyContent,
+          alignItems: rules.alignItems,
+          alignContent: rules.alignContent,
+          flexDirection: rules.flexDirection,
+          flexWrap: rules.flexWrap,
+          gap: `${boxGap || 0}px`,
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: rules.justifyContent,
-            alignItems: rules.alignItems,
-            flexDirection: rules.flexDirection,
-            flexWrap: rules.flexWrap,
-            gap: `${boxGap}px`,
-          }}
-        >
-          {boxes}
-        </div>
+        {boxes}
       </div>
     );
 };

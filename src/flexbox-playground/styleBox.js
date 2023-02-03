@@ -1,4 +1,4 @@
-import React, { useEffect }  from 'react';
+import React  from 'react';
 
 const StyleBox = ({ ruleName, options, defaultOpt, preChecked, onChange }) => {
   const listOfOptions = options.map((opt, index) => (

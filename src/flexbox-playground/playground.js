@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Controller from './controller';
 import Display from './display';
 import StyleBox from './styleBox';

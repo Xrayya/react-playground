@@ -1,16 +1,25 @@
 import React from 'react';
-import HourlyTemperatureWrapper from './hourly-temperature-wrapper';
+import HourlyForcastWrapper from './hourly-forecast-wrapper';
 
-const DisplayHourlyTemperature = ({ temperature, time }) => {
+const DisplayHourlyForecast = ({
+  time,
+  temperature,
+  apparentTemparature,
+  weatherCode,
+  visibility,
+  windSpeed,
+  windDirection,
+  unit,
+}) => {
   let hourlyTemperature = [];
   for (let i = 0; i < temperature.length; i++) {
     const date = new Date(time[i]);
     hourlyTemperature.push(
-      <HourlyTemperatureWrapper
+      <HourlyForcastWrapper
         key={i}
         time={`${date.getHours()}:00`}
         temperature={temperature[i]}
-        weather='not yet implemented'
+        weatherCode={weatherCode[i]}
       />
     );
   }
@@ -19,8 +28,10 @@ const DisplayHourlyTemperature = ({ temperature, time }) => {
       style={{
         width: '100%',
         overflow: 'scroll',
+
         display: 'flex',
         flexDirection: 'row',
+        // flexWrap: 'wrap',
         gap: '8px',
       }}
     >
@@ -29,4 +40,4 @@ const DisplayHourlyTemperature = ({ temperature, time }) => {
   );
 };
 
-export default DisplayHourlyTemperature;
+export default DisplayHourlyForecast;

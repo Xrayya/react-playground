@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import DisplayHourlyTemperature from './display-hourly-temperature';
-import './style.css';
+import DisplayHourlyForecast from './display-hourly-forecast';
 
 const DisplayWeather = () => {
   const [weatherData, setWeatherData] = useState({});
@@ -22,7 +21,7 @@ const DisplayWeather = () => {
   }
 
   async function getWeatherData(latitude, longitude) {
-    const api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m`;
+    const api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode,apparent_temperature,windspeed_10m,winddirection_10m,visibility`;
     const result = await fetch(api);
     const locWeather = await result.json();
     setWeatherData(locWeather);
@@ -53,11 +52,12 @@ const DisplayWeather = () => {
         <input ref={countryRef} type='text' name='location' id='country' />
       </div>
       <input type='submit' onClick={handleSubmit} />
-      <DisplayHourlyTemperature
+      <DisplayHourlyForecast
         temperature={
           weatherData.hourly ? weatherData.hourly.temperature_2m : []
         }
         time={weatherData.hourly ? weatherData.hourly.time : []}
+        weatherCode={weatherData.hourly ? weatherData.hourly.weathercode : []}
       />
     </div>
   );

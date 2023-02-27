@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import OptionsMenu from './options-menu';
 
 const LocationInput = ({ onSelect }) => {
-  const [locList, setLocLists] = useState([]);
+  const [locList, setLocLists] = useState(null);
 
   async function getLocatation(cityName) {
     const api = `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}`;
     const result = await fetch(api);
     const locData = await result.json();
+    console.log(locData.results);
     setLocLists(locData.results);
   }
 
@@ -22,22 +24,28 @@ const LocationInput = ({ onSelect }) => {
   };
 
   const handleOnSelect = async (e) => {
-    console.log('t');
-    const weatherData = await getWeatherData(
-      e.target.value[0],
-      e.target.value[1]
-    );
-    console.log(weatherData);
+    const loc = e.target.value.split(' ');
+    const weatherData = await getWeatherData(loc[0], loc[1]);
     onSelect(weatherData);
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div
+      style={{
+        width: '300px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <input
         type='text'
         onChange={handleOnChange}
         onFocus={(e) => {
-          e.target.value = '';
+          if (e.target.value === e.target.defaultValue) {
+            e.target.value = '';
+          }
           e.target.style.outline = 'none';
           e.target.style.border = 'solid 2px grey';
         }}
@@ -49,7 +57,8 @@ const LocationInput = ({ onSelect }) => {
         }}
         defaultValue='Input Your Location'
         style={{
-          width: '300px',
+          width: '100%',
+          boxSizing: 'border-box',
           padding: '8px',
           fontSize: '16px',
           textAlign: 'center',
@@ -59,13 +68,15 @@ const LocationInput = ({ onSelect }) => {
         }}
       />
       {locList && (
-        <select onSelect={handleOnSelect}>
-          {locList.map((locData, index) => (
-            <option key={index} value={[locData.latitude, locData.longitude]}>
-              {`${locData.name}, ${locData.country}`}
-            </option>
-          ))}
-        </select>
+        <OptionsMenu
+          data={locList}
+          onSelect={handleOnSelect}
+          style={{
+            border: 'solid 2px black',
+            borderRadius: '8px',
+            boxSizing: 'border-box',
+          }}
+        />
       )}
     </div>
   );

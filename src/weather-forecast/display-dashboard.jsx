@@ -3,17 +3,9 @@ import LocationInput from './location-input';
 
 const WeatherDashboard = () => {
   const [weatherData, setWeatherData] = useState({});
-  const cityRef = useRef();
-  const countryRef = useRef();
 
-
-  const handleSubmit = async () => {
-    const [latitude, longitude] = await getLocatation(
-      cityRef.current.value,
-      countryRef.current.value
-    );
-    console.log(latitude, longitude);
-    await getWeatherData(latitude, longitude);
+  const handleOnSelect = (weatherData) => {
+    setWeatherData(weatherData);
   };
 
   useEffect(() => {
@@ -21,8 +13,8 @@ const WeatherDashboard = () => {
   }, [weatherData]);
 
   return (
-    <div style={{padding: '64px'}}>
-      <LocationInput />
+    <div style={{ padding: '64px' }}>
+      <LocationInput onSelect={handleOnSelect} />
     </div>
   );
 };
